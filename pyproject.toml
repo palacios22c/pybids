@@ -23,14 +23,14 @@ classifiers = [
   "Topic :: Scientific/Engineering",
 ]
 dependencies = [
-  "numpy >=1.25",  # SPEC 0 + 1yr (3yr)
-  "scipy >=1.11",   # SPEC 0 + 1yr (3yr)
-  "nibabel >=5.1",  # SPEC 0 + 1yr (3yr)
-  "pandas >=2.0",  # SPEC 0 + 1yr (3yr)
+  "numpy >=1.25", # SPEC 0 + 1yr (3yr)
+  "scipy >=1.11", # SPEC 0 + 1yr (3yr)
+  "nibabel >=5.1", # SPEC 0 + 1yr (3yr)
+  "pandas >=2.0", # SPEC 0 + 1yr (3yr)
   "formulaic >=0.3",
   "sqlalchemy >=1.4.31",
-  "bids-validator>=1.14.7",  # Keep up-to-date to ensure support for recent modalities
-  "bidsschematools>=1.1.0",  # Required for schema-based configs
+  "bids-validator>=1.14.7", # Keep up-to-date to ensure support for recent modalities
+  "bidsschematools>=1.1.0", # Required for schema-based configs
   "num2words >=0.5.10",
   "click >=8.0",
   "universal_pathlib >=0.2.2",
@@ -39,6 +39,12 @@ dependencies = [
 dynamic = ["version"]
 
 [project.optional-dependencies]
+web = [
+  "aiohttp>=3.13.5",
+  "requests>=2.33.1",
+  "s3fs >= 2025" #for testing remote uri
+]
+
 doc = [
   "sphinx >=6.2",
   "numpydoc",
@@ -54,7 +60,10 @@ test = [
   "coverage[toml] >= 7",
   "altair >= 5",
   "pytest-xdist >= 3.8",
-  "s3fs >= 2025" #for testing remote uri
+  "pybids[web]",
+]
+formatting = [
+  "ruff>=0.15.11",
 ]
 model_reports = [
   "jinja2",
@@ -71,7 +80,7 @@ tutorial = [
 docs = ["pybids[doc]"]
 tests = ["pybids[test]"]
 ci_tests = ["pybids[test]"]
-dev = ["pybids[doc,test,plotting]"]
+dev = ["pybids[doc,test,plotting,formatting]"]
 
 [project.urls]
 Homepage = "https://github.com/bids-standard/pybids"
@@ -108,4 +117,3 @@ source = [
 
 [tool.coverage.report]
 include = ["src/*", "tests/*"]
-
